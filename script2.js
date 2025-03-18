@@ -11,7 +11,7 @@ class Pet {
         if (this.ownerName === otherPet.ownerName) {
             return true;
         } else {
-            return false
+            return false;
         }
     }
 }
@@ -33,14 +33,23 @@ function addPet(event) {
 
     console.log("Animale aggiunto:", newPet);
     console.log("Lista attuale:", pets);
-
-    aggiornaLista();
-    document.getElementById("petForm").reset();
 }
+aggiornaLista();
+
+// Resettiamo il form dopo aver aggiunto l'animale
+document.getElementById("petForm").reset();
+
 
 function aggiornaLista() {
-    const lista = document.getElementById("lista;");
-    lista.innerHTML = ""  //in questo modo la lista si ripulisce//
+    const petLista = document.getElementById("lista");
+    petLista.innerHTML = "";
 
+    pets.forEach(pet => {
+        const listItem = document.createElement("li");
+        listItem.innerText = pet.petName + " - " + pet.ownerName + " - " + pet.species + " - " + pet.breed;
+        petLista.appendChild(listItem);
+    });
 }
 
+
+document.getElementById("petForm").addEventListener("submit", addPet);
